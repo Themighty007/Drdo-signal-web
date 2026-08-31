@@ -39,13 +39,20 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
     dirLight.position.set(5, 10, 7);
     scene.add(dirLight);
 
-    const emeraldLight = new THREE.PointLight(0x00A878, 3, 15);
-    emeraldLight.position.set(-3, 2, 3);
-    scene.add(emeraldLight);
+    // Module 1 Light (Impulsive Gate - Red)
+    const redLight = new THREE.PointLight(0xff4d4f, 3, 15);
+    redLight.position.set(-3.2, 2, 2);
+    scene.add(redLight);
 
+    // Module 2 Light (DNN - Blue)
     const blueLight = new THREE.PointLight(0x1677FF, 3, 15);
-    blueLight.position.set(3, 2, -2);
+    blueLight.position.set(0, 2, 2);
     scene.add(blueLight);
+    
+    // Module 3 Light (NLMS - Green)
+    const greenLight = new THREE.PointLight(0x00A878, 3, 15);
+    greenLight.position.set(3.2, 2, 2);
+    scene.add(greenLight);
 
     const stageGroup = new THREE.Group();
     scene.add(stageGroup);
@@ -78,7 +85,7 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
       // Outer Wireframe Cage
       const wireGeo = new THREE.BoxGeometry(2.1, 1.3, 1.9);
       const wireMat = new THREE.MeshBasicMaterial({
-        color: i === 1 ? 0x1677ff : i === 2 ? 0x00a878 : 0x444850,
+        color: i === 0 ? 0xff4d4f : i === 1 ? 0x1677ff : 0x00a878,
         wireframe: true,
       });
       const wire = new THREE.Mesh(wireGeo, wireMat);
@@ -87,9 +94,9 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
       // Inner Core Indicator
       const coreIndicatorGeo = new THREE.OctahedronGeometry(0.4, 0);
       const coreIndicatorMat = new THREE.MeshStandardMaterial({
-        color: i === 2 ? 0x00a878 : i === 1 ? 0x1677ff : 0xffffff,
-        emissive: i === 2 ? 0x00a878 : i === 1 ? 0x1677ff : 0x555a61,
-        emissiveIntensity: 0.6,
+        color: i === 0 ? 0xff4d4f : i === 1 ? 0x1677ff : 0x00a878,
+        emissive: i === 0 ? 0xff4d4f : i === 1 ? 0x1677ff : 0x00a878,
+        emissiveIntensity: 0.8,
       });
       const coreMesh = new THREE.Mesh(coreIndicatorGeo, coreIndicatorMat);
       coreMesh.position.y = 1.1;
