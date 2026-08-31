@@ -13,12 +13,7 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const activeStageRef = useRef(activeStageIndex);
-
-  // Keep ref in sync with prop without triggering WebGL rebuilds
-  useEffect(() => {
-    activeStageRef.current = activeStageIndex;
-  }, [activeStageIndex]);
+  const [hoveredModule, setHoveredModule] = useState<number | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -170,7 +165,7 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
           core.rotation.y = time * (1.2 + idx * 0.4);
           core.rotation.z = time * 0.8;
           // Scale up active stage module
-          const targetY = idx === activeStageRef.current ? 0.35 : 0;
+          const targetY = idx === activeStageIndex ? 0.35 : 0;
           mod.position.y = THREE.MathUtils.lerp(mod.position.y, targetY, 0.08);
         }
       });
@@ -204,7 +199,7 @@ export const Architecture3D: React.FC<Architecture3DProps> = ({
         container.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [activeStageIndex]);
 
   return (
     <div

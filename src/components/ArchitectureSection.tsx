@@ -5,6 +5,15 @@ import { Shield, Cpu, Activity, Zap, Layers, Filter } from 'lucide-react';
 
 export const ArchitectureSection: React.FC = () => {
   const [selectedStage, setSelectedStage] = useState(0);
+  const [renderKey, setRenderKey] = useState(0);
+
+  // Force WebGL canvas to remount after initial layout paints to ensure sizing is perfect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRenderKey(1); 
+    }, 250);
+    return () => clearTimeout(timer);
+  }, []);
 
   const stages = [
     {
@@ -83,6 +92,7 @@ export const ArchitectureSection: React.FC = () => {
         {/* 3D Isometric Architecture Interactive Assembly */}
         <div className="bg-[#FAFAFA] rounded-3xl border border-black/8 p-6 sm:p-8 mb-12 shadow-xs">
           <Architecture3D
+            key={renderKey}
             activeStageIndex={selectedStage}
             onSelectStage={(idx) => setSelectedStage(idx)}
           />
