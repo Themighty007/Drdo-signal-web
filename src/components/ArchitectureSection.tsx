@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Architecture3D } from './Architecture3D';
 import { DualMicrophone3D } from './DualMicrophone3D';
 import { Shield, Cpu, Activity, Zap, Layers, Filter } from 'lucide-react';
