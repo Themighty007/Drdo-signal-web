@@ -1,0 +1,6 @@
+{
+  "name": "ShieldVoice",
+  "description": "Adaptive AI + DSP Noise Cancellation Engineered for Mission-Critical Defense Communication.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
